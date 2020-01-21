@@ -11,6 +11,7 @@ import StepWizard from './index';
 const Step1 = () => <div>Step 1</div>;
 const Step2 = () => <div>Step 2</div>;
 const Step3 = () => <div>Step 3</div>;
+const Step4 = () => <div>Step 4</div>;
 
 const render = jsx => Renderer.create(jsx);
 const getInstance = (component) => {
@@ -46,6 +47,26 @@ describe('Step Wizard Component', () => {
     it('empty component', () => {
         testComponent(<StepWizard />);
     });
+
+    it('conditional step when not visible', () => {
+        testComponent((
+            <StepWizard>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+                { false && <Step4 />}
+            </StepWizard>))
+    })
+
+    it('conditional step when visible', () => {
+        testComponent((
+            <StepWizard>
+                <Step1 />
+                <Step2 />
+                <Step3 />
+                { true && <Step4 />}
+            </StepWizard>))
+    })
 
     it('html element steps', () => {
         testComponent((
